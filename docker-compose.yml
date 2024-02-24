@@ -22,7 +22,7 @@ services:
           - .:/sessions_management_service:rw
           - ./third_party/userver/tools/docker:/tools:ro
         ports:
-          - 8080:8080
+          - '8080:8080'
         working_dir: /sessions_management_service
         entrypoint:
           - /tools/run_as_user.sh
