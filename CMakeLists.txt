@@ -21,13 +21,15 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/hello.cpp
     src/signin.cpp
     src/signin.hpp
+    src/authorize.cpp
+    src/authorize.hpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core)
 
 
 # Create a proto library with userver extensions
 include(GrpcTargets)
-userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS handlers/authentication.proto)
+userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS handlers/authentication.proto handlers/authorization.proto)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC ${PROJECT_NAME}_proto)
 
 

@@ -65,3 +65,5 @@ components_manager:
             task_processor: main-task-processor  # Run it on CPU bound task processor
 
         handler-signin:
+
+        handler-authorize:

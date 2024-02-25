@@ -9,6 +9,7 @@
 
 #include "hello.hpp"
 #include "signin.hpp"
+#include "authorize.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list = userver::components::MinimalServerComponentList()
@@ -21,6 +22,7 @@ int main(int argc, char* argv[]) {
 
   sessions_management_service::AppendHello(component_list);
   sessions_management_service::AppendSignIn(component_list);
+  sessions_management_service::AppendAuthorize(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);
 }
