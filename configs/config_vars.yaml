@@ -6,4 +6,3 @@ logger-level: debug
 is_testing: false
 
 server-port: 8080
-server-grpc-port: 8081

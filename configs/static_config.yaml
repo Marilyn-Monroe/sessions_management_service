@@ -15,7 +15,7 @@ components_manager:
 
     components:                       # Configuring components that were registered via component_list
         grpc-server:
-            port: $server-grpc-port
+            port: 8081
             service-defaults:
                 middlewares: [ ]
                 task-processor: main-task-processor

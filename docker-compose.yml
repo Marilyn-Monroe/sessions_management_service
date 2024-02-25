@@ -23,6 +23,7 @@ services:
           - ./third_party/userver/tools/docker:/tools:ro
         ports:
           - '8080:8080'
+          - '8081:8081'
         working_dir: /sessions_management_service
         entrypoint:
           - /tools/run_as_user.sh
