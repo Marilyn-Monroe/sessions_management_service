@@ -75,7 +75,7 @@ format:
 --in-docker-start-debug --in-docker-start-release: --in-docker-start-%: install-%
 	/home/user/.local/bin/sessions_management_service \
 		--config /home/user/.local/etc/sessions_management_service/static_config.yaml \
-		--config_vars /home/user/.local/etc/sessions_management_service/config_vars.yaml
+		--config_vars /home/user/.local/etc/sessions_management_service/config_vars.docker.yaml
 
 # Build and run service in docker environment
 .PHONY: docker-start-service-debug docker-start-service-release

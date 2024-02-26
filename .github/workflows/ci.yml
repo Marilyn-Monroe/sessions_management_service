@@ -60,6 +60,17 @@ jobs:
                 make dist-clean
                 make install PREFIX=`pwd`/local_installation/
 
+          - name: Setup redis cluster
+            uses: vishnudxb/redis-cluster@1.0.9
+            with:
+              master1-port: 7000
+              master2-port: 7001
+              master3-port: 7002
+              slave1-port: 7003
+              slave2-port: 7004
+              slave3-port: 7005
+              sleep-duration: 5
+
           - name: Test run after install
             if: matrix.make == 'test-release'
             run: >-

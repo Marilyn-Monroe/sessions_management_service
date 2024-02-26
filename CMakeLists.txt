@@ -3,6 +3,7 @@ project(sessions_management_service CXX)
 
 # Enable userver libraries that are needed in this project
 set(USERVER_FEATURE_GRPC ON CACHE BOOL "" FORCE)
+set(USERVER_FEATURE_REDIS ON CACHE BOOL "" FORCE)
 
 # Compatibility mode: some systems don't support these features
 set(USERVER_FEATURE_CRYPTOPP_BLAKE2 OFF CACHE BOOL "" FORCE)
@@ -24,7 +25,7 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/authorize.cpp
     src/authorize.hpp
 )
-target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core)
+target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core userver-redis)
 
 
 # Create a proto library with userver extensions
