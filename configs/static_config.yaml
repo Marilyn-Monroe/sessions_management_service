@@ -19,6 +19,9 @@ components_manager:
             service-defaults:
                 middlewares: [ ]
                 task-processor: main-task-processor
+
+        grpc-server-configurator:
+
         server:
             listener:                 # configuring the main listening socket...
                 port: $server-port            # ...to listen on this port and...

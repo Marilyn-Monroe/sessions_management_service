@@ -24,6 +24,8 @@ add_library(${PROJECT_NAME}_objs OBJECT
     src/signin.hpp
     src/authorize.cpp
     src/authorize.hpp
+    src/grpc_server_configurator.cpp
+    src/grpc_server_configurator.hpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core userver-redis)
 
