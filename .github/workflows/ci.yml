@@ -61,6 +61,7 @@ jobs:
                 make install PREFIX=`pwd`/local_installation/
 
           - name: Setup redis cluster
+            if: matrix.make == 'test-release'
             uses: vishnudxb/redis-cluster@1.0.9
             with:
               master1-port: 7000
@@ -88,4 +89,3 @@ jobs:
             if: matrix.make == 'test-release'
             run: |
                 killall sessions_management_service
-
