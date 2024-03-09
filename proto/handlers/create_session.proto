@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package handlers.api;
+
+message CreateSessionRequest {
+  string user_id = 1;
+}
+
+message CreateSessionResponse {
+  string session_id = 1;
+}
+
+service CreateSession {
+  rpc CreateSession (CreateSessionRequest) returns (CreateSessionResponse);
+}

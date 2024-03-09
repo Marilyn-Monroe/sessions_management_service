@@ -7,13 +7,15 @@
 #include <userver/storages/secdist/component.hpp>
 #include <userver/storages/secdist/provider_component.hpp>
 #include <userver/testsuite/testsuite_support.hpp>
+#include <userver/ugrpc/client/client_factory_component.hpp>
 #include <userver/ugrpc/server/server_component.hpp>
 #include <userver/utils/daemon_run.hpp>
 
-#include "authorize.hpp"
-#include "hello.hpp"
-#include "signin.hpp"
 #include "grpc_server_configurator.hpp"
+#include "handlers/check_session.hpp"
+#include "handlers/create_session.hpp"
+#include "handlers/delete_session.hpp"
+#include "hello.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list =
@@ -29,8 +31,9 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::Redis>("redis-db-1");
 
   sessions_management_service::AppendHello(component_list);
-  sessions_management_service::AppendSignIn(component_list);
-  sessions_management_service::AppendAuthorize(component_list);
+  sessions_management_service::handlers::AppendCreateSession(component_list);
+  sessions_management_service::handlers::AppendDeleteSession(component_list);
+  sessions_management_service::handlers::AppendCheckSession(component_list);
   sessions_management_service::AppendGrpcServerConfigurator(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);

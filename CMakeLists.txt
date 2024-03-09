@@ -20,19 +20,25 @@ userver_setup_environment()
 add_library(${PROJECT_NAME}_objs OBJECT
     src/hello.hpp
     src/hello.cpp
-    src/signin.cpp
-    src/signin.hpp
-    src/authorize.cpp
-    src/authorize.hpp
+    src/handlers/create_session.cpp
+    src/handlers/create_session.hpp
+    src/handlers/delete_session.cpp
+    src/handlers/delete_session.hpp
+    src/handlers/check_session.cpp
+    src/handlers/check_session.hpp
     src/grpc_server_configurator.cpp
     src/grpc_server_configurator.hpp
 )
-target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-core userver-redis)
+target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-redis)
 
 
 # Create a proto library with userver extensions
 include(GrpcTargets)
-userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS handlers/authentication.proto handlers/authorization.proto)
+userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS
+    handlers/create_session.proto
+    handlers/delete_session.proto
+    handlers/check_session.proto
+)
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC ${PROJECT_NAME}_proto)
 
 

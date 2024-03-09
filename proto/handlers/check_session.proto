@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package handlers.api;
+
+message CheckSessionRequest {
+  string session_id = 1;
+}
+
+message CheckSessionResponse {
+  bool status = 1;
+}
+
+service CheckSession {
+  rpc CheckSession (CheckSessionRequest) returns (CheckSessionResponse);
+}
