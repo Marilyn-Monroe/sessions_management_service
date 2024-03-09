@@ -2,7 +2,7 @@
 
 #include "userver/components/component.hpp"
 #include "userver/storages/redis/component.hpp"
-#include "userver/utils/uuid4.hpp"
+#include "userver/utils/uuid7.hpp"
 
 namespace sessions_management_service::handlers {
 
@@ -23,19 +23,23 @@ void CreateSessionHandler::CreateSession(
   ::handlers::api::CreateSessionResponse response;
 
   const auto& user_id = request.user_id();
-  const auto thirty_days = std::chrono::hours{24 * 30};
-  auto session_id = userver::utils::generators::GenerateUuid();
+  auto session_id = GenerateSessionID(user_id);
   try {
+    const auto thirty_days = std::chrono::hours{24 * 30};
     redis_client_->Set(session_id, user_id, thirty_days, redis_cc_).Get();
     response.set_session_id(session_id);
     call.Finish(response);
   } catch (const userver::redis::RequestFailedException& e) {
-    grpc::Status error_status(grpc::StatusCode::UNAVAILABLE, e.what());
-    call.FinishWithError(error_status);
+    call.FinishWithError(grpc::Status(grpc::StatusCode::UNAVAILABLE, e.what()));
   }
 }
 
 }  // namespace
+
+std::string GenerateSessionID(std::string_view user_id) {
+  auto session_id = userver::utils::generators::GenerateUuidV7();
+  return session_id;
+}
 
 void AppendCreateSession(userver::components::ComponentList& component_list) {
   component_list.Append<CreateSessionHandler>();

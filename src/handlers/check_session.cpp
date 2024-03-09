@@ -28,8 +28,7 @@ void CheckSessionHandler::CheckSession(
     response.set_status(result ? true : false);
     call.Finish(response);
   } catch (const userver::redis::RequestFailedException& e) {
-    grpc::Status error_status(grpc::StatusCode::UNAVAILABLE, e.what());
-    call.FinishWithError(error_status);
+    call.FinishWithError(grpc::Status(grpc::StatusCode::UNAVAILABLE, e.what()));
   }
 }
 

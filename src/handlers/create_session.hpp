@@ -28,6 +28,8 @@ class CreateSessionHandler final
 
 }  // namespace
 
+std::string GenerateSessionID(std::string_view user_id);
+
 void AppendCreateSession(userver::components::ComponentList& component_list);
 
 }  // namespace sessions_management_service::handlers
