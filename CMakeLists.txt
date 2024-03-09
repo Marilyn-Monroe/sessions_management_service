@@ -18,8 +18,6 @@ userver_setup_environment()
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
-    src/hello.hpp
-    src/hello.cpp
     src/handlers/create_session.cpp
     src/handlers/create_session.hpp
     src/handlers/delete_session.cpp

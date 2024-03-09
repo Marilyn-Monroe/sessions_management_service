@@ -15,7 +15,6 @@
 #include "handlers/check_session.hpp"
 #include "handlers/create_session.hpp"
 #include "handlers/delete_session.hpp"
-#include "hello.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list =
@@ -30,7 +29,6 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::DefaultSecdistProvider>()
           .Append<userver::components::Redis>("redis-db-1");
 
-  sessions_management_service::AppendHello(component_list);
   sessions_management_service::handlers::AppendCreateSession(component_list);
   sessions_management_service::handlers::AppendDeleteSession(component_list);
   sessions_management_service::handlers::AppendCheckSession(component_list);
