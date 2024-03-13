@@ -7,4 +7,4 @@ is_testing: true
 
 server-port: 8080
 
-secdist-path: /etc/sessions_management_service/secure_data.json
+sessions-management-endpoint: '[::1]:8081'

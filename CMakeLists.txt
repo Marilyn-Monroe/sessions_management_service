@@ -18,14 +18,12 @@ userver_setup_environment()
 
 # Common sources
 add_library(${PROJECT_NAME}_objs OBJECT
-    src/handlers/create_session.cpp
-    src/handlers/create_session.hpp
-    src/handlers/delete_session.cpp
-    src/handlers/delete_session.hpp
-    src/handlers/check_session.cpp
-    src/handlers/check_session.hpp
+    src/sessions_management_service.cpp
+    src/sessions_management_service.hpp
     src/grpc_server_configurator.cpp
     src/grpc_server_configurator.hpp
+    src/sessions_management_client.cpp
+    src/sessions_management_client.hpp
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-redis)
 
@@ -33,9 +31,7 @@ target_link_libraries(${PROJECT_NAME}_objs PUBLIC userver-redis)
 # Create a proto library with userver extensions
 include(GrpcTargets)
 userver_add_grpc_library(${PROJECT_NAME}_proto PROTOS
-    handlers/create_session.proto
-    handlers/delete_session.proto
-    handlers/check_session.proto
+    handlers/sessions_management.proto
 )
 target_link_libraries(${PROJECT_NAME}_objs PUBLIC ${PROJECT_NAME}_proto)
 
@@ -47,7 +43,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs)
 
 # Unit Tests
 add_executable(${PROJECT_NAME}_unittest
-    src/handlers/create_session_test.cpp
+        src/sessions_management_test.cpp
 )
 target_link_libraries(${PROJECT_NAME}_unittest PRIVATE ${PROJECT_NAME}_objs userver-utest)
 add_google_tests(${PROJECT_NAME}_unittest)

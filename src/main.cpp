@@ -12,9 +12,8 @@
 #include <userver/utils/daemon_run.hpp>
 
 #include "grpc_server_configurator.hpp"
-#include "handlers/check_session.hpp"
-#include "handlers/create_session.hpp"
-#include "handlers/delete_session.hpp"
+#include "sessions_management_client.hpp"
+#include "sessions_management_service.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list =
@@ -25,13 +24,13 @@ int main(int argc, char* argv[]) {
           .Append<userver::clients::dns::Component>()
           .Append<userver::server::handlers::TestsControl>()
           .Append<userver::ugrpc::server::ServerComponent>()
+          .Append<userver::ugrpc::client::ClientFactoryComponent>()
           .Append<userver::components::Secdist>()
           .Append<userver::components::DefaultSecdistProvider>()
           .Append<userver::components::Redis>("redis-db-1");
 
-  sessions_management_service::handlers::AppendCreateSession(component_list);
-  sessions_management_service::handlers::AppendDeleteSession(component_list);
-  sessions_management_service::handlers::AppendCheckSession(component_list);
+  sessions_management_service::AppendSessionsManagementService(component_list);
+  sessions_management_service::AppendSessionsManagementClient(component_list);
   sessions_management_service::AppendGrpcServerConfigurator(component_list);
 
   return userver::utils::DaemonMain(argc, argv, component_list);

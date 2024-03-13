@@ -7,4 +7,6 @@ is_testing: false
 
 server-port: 8080
 
+sessions-management-endpoint: '[::1]:8081'
+
 secdist-path: /home/runner/work/sessions_management_service/sessions_management_service/local_installation/etc/sessions_management_service/secure_data.json

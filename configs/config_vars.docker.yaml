@@ -7,4 +7,6 @@ is_testing: false
 
 server-port: 8080
 
+sessions-management-endpoint: '[::1]:8081'
+
 secdist-path: /home/user/.local/etc/sessions_management_service/secure_data.docker.json
